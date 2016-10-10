@@ -1,0 +1,27 @@
+{
+    "version": "0.1.0",
+    "command": "node",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "tasks": [
+        {
+            "taskName": "Test",
+            "suppressTaskName": true,
+            "isBuildCommand": false,
+            "isTestCommand": true,
+            "showOutput": "always",
+            "args": [
+                "${file}"
+            ]
+        },
+        {
+            "taskName": "Build",
+            "suppressTaskName": true,
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "args": [
+                "${workspaceRoot}/src/index.js"
+            ]
+        }
+    ]
+}
