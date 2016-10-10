@@ -1,17 +1,17 @@
 {
   "name": "io-extra",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
-      "name": "Marc Seiferle",
-      "email" : "ms007@gmx.ch"
+    "name": "Marc Seiferle",
+    "email": "ms007@gmx.ch"
   },
   "repository": {
-      "url": "https://github.com/ms007/io-extra"
+    "url": "https://github.com/ms007/io-extra"
   },
   "license": "ISC",
   "devDependencies": {
