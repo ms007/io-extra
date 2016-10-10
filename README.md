@@ -7,7 +7,7 @@ Library to simplify file system access with promises in Node.js (Node version > 
 Installation
 ------------
 
-    npm install --save fs-extra
+    npm install --save io-extra
 
 Usage
 -----
@@ -48,7 +48,7 @@ io.file.exists('/tmp/myfile').then((exists) => console.log('file exists: ' + exi
 **create(file)**
 
 Creates a file if it doesn't already exists.
-Promise returns the path of the created file.
+Promise returns the full path of the created file.
 
 Example:
 

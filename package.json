@@ -6,7 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "ms007@gmx.ch",
+  "author": {
+      "name": "Marc Seiferle",
+      "email" : "ms007@gmx.ch"
+  },
+  "repository": {
+      "url": "https://github.com/ms007/io-extra"
+  },
   "license": "ISC",
   "devDependencies": {
     "eslint": "^3.7.1",
