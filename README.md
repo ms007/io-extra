@@ -1,15 +1,21 @@
 # io-extra
 
-Library to simplify file system access with promises in Node.js (Node version > 4.3.2)
+Library to simplify file system access with promises in Node.js
 
 [![npm Package](https://img.shields.io/npm/v/io-extra.svg?style=flat-square)](https://www.npmjs.org/package/io-extra)
-
-**NOTE (2016-10-10):** Node v4.3.2 or newer is required (builtin promises).
 
 Installation
 ------------
 
     npm install --save io-extra
+
+Implementation
+--------------
+
+`io-extra` is a thin wrapper on top of [`fs-promise`][1] simplifying the file and directory access with easy to use and well documented functions.
+
+* All functions returns ES2015 (ES6) compatible promises.
+* Use [any-promise][2] to load your preferred `Promise` implementation.
 
 Usage
 -----
@@ -24,7 +30,7 @@ io.file.exists('/tmp/myfile').then((exists) => {
 }
 ```
 
-[**File Methods**](#file)
+[**File Methods**](#file) |
 [**Directory Methods**](#directory)
 
 
@@ -43,6 +49,8 @@ File
 
 Returnes the resolved full path of a file.
 The file must exist.
+
+Example:
 
 ```js
 const io = require('io-extra');
@@ -106,7 +114,7 @@ io.file.remove('/tmp/myfile').then(() => console.log('file removed.'));
 Reads the entire contents of a file.
 Promise contains the text of the file.
 
-encoding = (optional string) specifies the type of encoding to read the file. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding is provided, the default is utf8.
+- encoding: (optional string) specifies the type of encoding to read the file. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding is provided, the default is utf8.
 
 Example:
 
@@ -124,11 +132,11 @@ Writes data to a file, replacing the file if it already exists.
 If the parent directory does not exist, it's created.
 Empty promise is returned.
 
-file = (string) filepath of the file to write to.
+- file: (string) filepath of the file to write to.
 
-data = (string or buffer) the data you want to write to the file.
+- data: (string or buffer) the data you want to write to the file.
 
-encoding = (optional string) the encoding of the data. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding provided, then 'utf8' is assumed.
+- encoding: (optional string) the encoding of the data. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding provided, then 'utf8' is assumed.
 
 Example:
 
@@ -151,6 +159,8 @@ Directory
 
 Returnes the resolved full path of a directory.
 The directory must exist.
+
+Example:
 
 ```js
 const io = require('io-extra');
@@ -206,3 +216,6 @@ const io = require('io-extra');
 
 io.directory.remove('/tmp').then(() => console.log('directory removed.'));
 ```
+
+[1]: https://www.npmjs.org/package/fs-promise
+[2]: https://github.com/kevinbeaty/any-promise
