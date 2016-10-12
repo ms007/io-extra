@@ -45,3 +45,12 @@ jspm_packages
 
 # Temp
 temp
+
+# Dev
+.editorconfig
+..eslintrc.json
+.jsconfig.json
+.vscode
+
+# Spec
+*.spec.js
