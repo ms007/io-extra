@@ -35,6 +35,8 @@ File
 - [exists](#file-exists)
 - [create](#create-file)
 - [remove](#remove-file)
+- [read](#read-file)
+- [write](#write-file)
 
 ### resolve fullpath
 **path(file)**
@@ -95,6 +97,45 @@ Example:
 const io = require('io-extra');
 
 io.file.remove('/tmp/myfile').then(() => console.log('file removed.'));
+```
+
+### read file
+
+**read(file, [encoding])**
+
+Reads the entire contents of a file.
+Promise contains the text of the file.
+
+encoding = (optional string) specifies the type of encoding to read the file. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding is provided, the default is utf8.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.file.read('/tmp/myfile').then((text) => console.log(text));
+```
+
+### write file
+
+**write(file, data, [encoding])**
+
+Writes data to a file, replacing the file if it already exists.
+If the parent directory does not exist, it's created.
+Empty promise is returned.
+
+file = (string) filepath of the file to write to.
+
+data = (string or buffer) the data you want to write to the file.
+
+encoding = (optional string) the encoding of the data. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding provided, then 'utf8' is assumed.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.file.write('/tmp/myfile', 'io-extra is easy!').then(() => console.log('file written.'));
 ```
 
 Directory

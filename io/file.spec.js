@@ -76,7 +76,22 @@ test('file is created and returned', (assert) => {
         file.create(testFile)
             .then(f => file.exists(f).then((exists) => {
                 assert.true(exists, 'file exists');
+                assert.end();
             }))
+            .then(() => file.remove(testFile));
+    });
+});
+
+test('file is written and read', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const testFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+        file.write(testFile, 'io-extra is easy!')
+            .then(() => file.read(testFile))
+            .then((text) => {
+                assert.equal(text, 'io-extra is easy!', 'correct text');
+                assert.end();
+                return Promise.resolve();
+            })
             .then(() => file.remove(testFile));
     });
 });
