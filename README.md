@@ -87,6 +87,8 @@ io.file.create('/tmp/myfile').then((file) => console.log('file ' + file + ' crea
 Removes a file if it exists.
 Empty promise is returned.
 
+Alias: `delete()`
+
 Example:
 
 ```js
@@ -98,12 +100,12 @@ io.file.remove('/tmp/myfile').then(() => console.log('file removed.'));
 Directory
 -------
 
-- [path](#resolve-fullpath)
+- [path](#resolve-directory-fullpath)
 - [exists](#directory-exists)
 - [create](#create-directory)
 - [remove](#remove-directory)
 
-### resolve fullpath
+### resolve directory fullpath
 **path(directory)**
 
 Returnes the resolved full path of a directory.
@@ -153,6 +155,8 @@ io.directory.create('/tmp').then((dir) => console.log('directory ' + dir + ' cre
 
 Removes a directory if it exists.
 Empty promise is returned.
+
+Alias: `delete()`
 
 Example:
 
