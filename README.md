@@ -41,6 +41,7 @@ File
 - [exists](#file-exists)
 - [create](#create-file)
 - [remove](#remove-file)
+- [copy](#copy-file)
 - [read](#read-file)
 - [write](#write-file)
 
@@ -107,6 +108,26 @@ const io = require('io-extra');
 io.file.remove('/tmp/myfile').then(() => console.log('file removed.'));
 ```
 
+### copy file
+
+**copy(src, dest, [overwrite], [preserveTimestamps])**
+
+Copies a file. If the destination file is in directories that do not exist, these directories are created.
+Promise returns the full path of the destination file.
+
+- overwrite: (optional boolean) overwrite existing file, default is `true`.
+
+- preserveTimestamps : (optional boolean) set last modification and access time to the original source files, default is `false`.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.file.copy('/tmp/myfile', '/tmp/dest/myfile.bak')
+    .then((file) => console.log('file copied to ' + file));
+```
+
 ### read file
 
 **read(file, [encoding])**
@@ -143,7 +164,8 @@ Example:
 ```js
 const io = require('io-extra');
 
-io.file.write('/tmp/myfile', 'io-extra is easy!').then(() => console.log('file written.'));
+io.file.write('/tmp/myfile', 'io-extra is easy!')
+    .then(() => console.log('file written.'));
 ```
 
 Directory

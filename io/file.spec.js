@@ -95,3 +95,58 @@ test('file is written and read', (assert) => {
             .then(() => file.remove(testFile));
     });
 });
+
+test('file is copied and replaced', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const sourceFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+        const destinationFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+
+        file.write(sourceFile, '1')
+            .then(() => file.create(destinationFile))
+            .then(() => file.copy(sourceFile, destinationFile))
+            .then(() => file.read(destinationFile))
+            .then((text) => {
+                assert.equal(text, '1', 'same text');
+                assert.end();
+            })
+            .then(() => file.remove(sourceFile))
+            .then(() => file.remove(destinationFile));
+    });
+});
+
+test('file is not copied when overwriting is disabled', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const sourceFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+        const destinationFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+
+        file.write(sourceFile, '1')
+            .then(() => file.write(destinationFile, '2'))
+            .then(() => file.copy(sourceFile, destinationFile, false))
+            .then(() => file.read(destinationFile))
+            .then((text) => {
+                assert.equal(text, '2', 'same text');
+                assert.end();
+            })
+            .then(() => file.remove(sourceFile))
+            .then(() => file.remove(destinationFile));
+    });
+});
+
+test('file is copied with destination tree structure created', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const sourceFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+
+        const destinationDir = `${defaultDirectory}/${randomstring.generate(options)}`;
+        const destinationFile = `${destinationDir}/${randomstring.generate(options)}.txt`;
+
+        file.write(sourceFile, '1')
+            .then(() => file.copy(sourceFile, destinationFile))
+            .then(() => file.exists(destinationFile))
+            .then((exists) => {
+                assert.ok(exists, 'file copied');
+                assert.end();
+            })
+            .then(() => file.remove(sourceFile))
+            .then(() => directory.remove(destinationDir));
+    });
+});

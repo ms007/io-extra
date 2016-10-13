@@ -16,6 +16,14 @@ function remove(file) {
     return fs.remove(file);
 }
 
+function copy(src, dest, overwrite = true, preserveTimestamps = false) {
+    const options = {
+        clobber: overwrite,
+        preserveTimestamps,
+    };
+    return fs.copy(src, dest, options).then(() => path(dest));
+}
+
 function read(file, options = {}) {
     const opts = Object.assign({}, options);
     if (!opts.encoding) {
@@ -34,6 +42,7 @@ module.exports = {
     create,
     remove,
     delete: remove,
+    copy,
     read,
     write,
 };
