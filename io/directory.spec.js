@@ -1,11 +1,12 @@
 const test = require('tape');
 
+const file = require('./file');
 const directory = require('./directory');
 const randomstring = require('randomstring');
 
 const defaultDirectory = './temp';
 
-const options = {
+const shortname = {
     length: 7,
     charset: 'alphabetic',
     capitalization: 'lowercase',
@@ -31,7 +32,7 @@ function ensureDirectory(assert) {
 
 test('returns fullpath', (assert) => {
     ensureDirectory(assert).then(() => {
-        const testDirectory = `${defaultDirectory}/${randomstring.generate(options)}`;
+        const testDirectory = `${defaultDirectory}/${randomstring.generate(shortname)}`;
         directory.create(testDirectory)
             .then(() => directory.path(testDirectory)
                 .then((path) => {
@@ -44,7 +45,7 @@ test('returns fullpath', (assert) => {
 
 test('directory is created and deleted', (assert) => {
     ensureDirectory(assert).then(() => {
-        const testDirectory = `${defaultDirectory}/${randomstring.generate(options)}`;
+        const testDirectory = `${defaultDirectory}/${randomstring.generate(shortname)}`;
         directory.create(testDirectory)
             .then(() => directory.exists(testDirectory).then((exists) => {
                 assert.true(exists, 'directory exists');
@@ -59,11 +60,33 @@ test('directory is created and deleted', (assert) => {
 
 test('returns no error when nonexisting directory cant be deleted', (assert) => {
     ensureDirectory(assert).then(() => {
-        const testDirectory = `${defaultDirectory}/${randomstring.generate(options)}`;
+        const testDirectory = `${defaultDirectory}/${randomstring.generate(shortname)}`;
         directory.remove(testDirectory)
             .then(() => {
                 assert.pass('no error');
                 assert.end();
             });
+    });
+});
+
+test.only('copies directory with files', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const source = `${defaultDirectory}/${randomstring.generate(shortname)}`;
+        const destination = `${defaultDirectory}/${randomstring.generate(shortname)}`;
+        const filename = `${randomstring.generate(shortname)}.txt`;
+        const sourceFile = `${source}/${filename}`;
+        const destinationFile = `${destination}/${filename}`;
+
+        const options = { overwrite: true };
+
+        file.create(sourceFile)
+            .then(() => directory.copy(source, destination, options))
+            .then(() => file.exists(destinationFile))
+            .then((exists) => {
+                assert.ok(exists, 'file exists');
+                assert.end();
+            })
+            .then(() => directory.remove(destination))
+            .then(() => directory.remove(source));
     });
 });

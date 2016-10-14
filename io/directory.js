@@ -16,10 +16,27 @@ function remove(directory) {
     return fs.remove(directory);
 }
 
+function copy(src, dest, options = {}) {
+    const opts = Object.keys(options)
+        .reduce((previous, current) => {
+            const items = Object.assign({}, previous);
+            if (current === 'overwrite') {
+                items.clobber = options[current];
+            } else {
+                items[current] = options[current];
+            }
+
+            return items;
+        }, {});
+
+    return fs.copy(src, dest, opts).then(() => path(dest));
+}
+
 module.exports = {
     path,
     exists,
     create,
     remove,
     delete: remove,
+    copy,
 };

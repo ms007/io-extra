@@ -15,7 +15,7 @@ Implementation
 `io-extra` is a thin wrapper on top of [`fs-promise`][1] simplifying the file and directory access with easy to use and well documented functions.
 
 * All functions returns ES2015 (ES6) compatible promises.
-* Use [any-promise][2] to load your preferred `Promise` implementation.
+* Use [any-promise][2] to register your preferred `Promise` implementation. (defaults to the Node builtin global Promise)
 
 Usage
 -----
@@ -117,7 +117,7 @@ Promise returns the full path of the destination file.
 
 - overwrite: (optional boolean) overwrite existing file, default is `true`.
 
-- preserveTimestamps : (optional boolean) set last modification and access time to the original source files, default is `false`.
+- preserveTimestamps : (optional boolean) set last modification and access time to the original source file, default is `false`.
 
 Example:
 
@@ -175,6 +175,7 @@ Directory
 - [exists](#directory-exists)
 - [create](#create-directory)
 - [remove](#remove-directory)
+- [copy](#copy-directory)
 
 ### resolve directory fullpath
 **path(directory)**
@@ -237,6 +238,32 @@ Example:
 const io = require('io-extra');
 
 io.directory.remove('/tmp').then(() => console.log('directory removed.'));
+```
+
+### copy directory
+
+**copy(src, dest, [options])**
+
+Copies a directory.
+If the destination directory is in directories that do not exist, these directories are created.
+Promise returns the full path of the destination directory.
+
+- options: (optional object)
+  - overwrite: (boolean) overwrite existing directories and files, default is `true`
+
+  - dereference: (boolean) dereference symlinks, default is `false`.
+
+  - preserveTimestamps: (boolean) set last modification and access time to the original source files, default is `false`.
+
+  - filter: (function or RegExp) filter copied files. If function, return true to include, false to exclude. If RegExp, same as function, where filter is filter.test.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.directory.copy('/tmp', '/temp')
+    .then((directory) => console.log('directory copied to: ' + directory));
 ```
 
 [1]: https://www.npmjs.org/package/fs-promise
