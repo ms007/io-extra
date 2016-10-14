@@ -2,7 +2,8 @@
 
 Library to simplify file system access with promises in Node.js
 
-[![npm Package](https://img.shields.io/npm/v/io-extra.svg?style=flat-square)](https://www.npmjs.org/package/io-extra)
+[![npm Package](https://img.shields.io/npm/v/io-extra.svg)](https://www.npmjs.org/package/io-extra)
+[![build status](https://img.shields.io/travis/ms007/io-extra/develop.svg)](http://travis-ci.org/ms007/io-extra)
 
 Installation
 ------------
