@@ -90,3 +90,27 @@ test('copies directory with files', (assert) => {
             .then(() => directory.remove(source));
     });
 });
+
+test('renames directory with files', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const source = `${defaultDirectory}/${randomstring.generate(shortname)}`;
+        const destination = `${defaultDirectory}/${randomstring.generate(shortname)}`;
+        const filename = `${randomstring.generate(shortname)}.txt`;
+        const sourceFile = `${source}/${filename}`;
+        const destinationFile = `${destination}/${filename}`;
+
+        file.create(sourceFile)
+            .then(() => directory.rename(source, destination))
+            .then(() => file.exists(destinationFile))
+            .then((exists) => {
+                assert.ok(exists, 'file exists');
+            })
+            .then(() => file.exists(source))
+            .then((exists) => {
+                assert.notOk(exists, 'source renamed');
+                assert.end();
+            })
+            .then(() => directory.remove(destination))
+            .then(() => directory.remove(source));
+    });
+});

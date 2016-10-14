@@ -194,6 +194,7 @@ Directory
 - [exists](#directory-exists)
 - [create](#create-directory)
 - [remove](#remove-directory)
+- [rename](#rename-directory)
 - [copy](#copy-directory)
 
 ### resolve directory fullpath
@@ -257,6 +258,23 @@ Example:
 const io = require('io-extra');
 
 io.directory.remove('/tmp').then(() => console.log('directory removed.'));
+```
+
+### rename directory
+
+**rename(src, dest, [overwrite])**
+
+Renames a directory. Promise returns the full path of the destination directory.
+
+- overwrite: (optional boolean) overwrite existing directory, default is `true`.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.directory.rename('/tmp', '/bak')
+    .then((directory) => console.log('directory renamed to ' + directory));
 ```
 
 ### copy directory

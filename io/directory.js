@@ -16,6 +16,22 @@ function remove(directory) {
     return fs.remove(directory);
 }
 
+function rename(src, dest, overwrite = true) {
+    const func = () => fs.rename(src, dest).then(() => path(dest));
+
+    if (overwrite) {
+        return func();
+    }
+
+    return exists(dest).then((alreadyExists) => {
+        if (alreadyExists) {
+            return path(dest);
+        }
+
+        return func();
+    });
+}
+
 function copy(src, dest, options = {}) {
     const opts = Object.keys(options)
         .reduce((previous, current) => {
@@ -38,5 +54,6 @@ module.exports = {
     create,
     remove,
     delete: remove,
+    rename,
     copy,
 };
