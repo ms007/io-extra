@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape io/**/*.spec.js | faucet"
   },
   "author": {
     "name": "Marc Seiferle",
@@ -20,6 +20,7 @@
     "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
+    "faucet": "0.0.1",
     "randomstring": "^1.1.5",
     "tape": "^4.6.2"
   },

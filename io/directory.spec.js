@@ -30,7 +30,7 @@ function ensureDirectory(assert) {
         });
 }
 
-test('returns fullpath', (assert) => {
+test.skip('returns fullpath', (assert) => {
     ensureDirectory(assert).then(() => {
         const testDirectory = `${defaultDirectory}/${randomstring.generate(shortname)}`;
         directory.create(testDirectory)
@@ -69,7 +69,7 @@ test('returns no error when nonexisting directory cant be deleted', (assert) => 
     });
 });
 
-test.only('copies directory with files', (assert) => {
+test('copies directory with files', (assert) => {
     ensureDirectory(assert).then(() => {
         const source = `${defaultDirectory}/${randomstring.generate(shortname)}`;
         const destination = `${defaultDirectory}/${randomstring.generate(shortname)}`;

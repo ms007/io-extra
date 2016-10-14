@@ -249,7 +249,7 @@ If the destination directory is in directories that do not exist, these director
 Promise returns the full path of the destination directory.
 
 - options: (optional object)
-  - overwrite: (boolean) overwrite existing directories and files, default is `true`
+  - overwrite: (boolean) overwrite existing directories and files, default is `true`.
 
   - dereference: (boolean) dereference symlinks, default is `false`.
 

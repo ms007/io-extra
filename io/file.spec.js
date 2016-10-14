@@ -29,7 +29,7 @@ function ensureDirectory(assert) {
         });
 }
 
-test('returns fullpath', (assert) => {
+test.skip('returns fullpath', (assert) => {
     ensureDirectory(assert).then(() => {
         const testFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
         file.create(testFile)
