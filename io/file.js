@@ -16,6 +16,22 @@ function remove(file) {
     return fs.remove(file);
 }
 
+function rename(src, dest, overwrite = true) {
+    const func = () => fs.rename(src, dest).then(() => path(dest));
+
+    if (overwrite) {
+        return func();
+    }
+
+    return exists(dest).then((alreadyExists) => {
+        if (alreadyExists) {
+            return path(dest);
+        }
+
+        return func();
+    });
+}
+
 function copy(src, dest, overwrite = true, preserveTimestamps = false) {
     const options = {
         clobber: overwrite,
@@ -42,6 +58,7 @@ module.exports = {
     create,
     remove,
     delete: remove,
+    rename,
     copy,
     read,
     write,

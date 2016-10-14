@@ -150,3 +150,23 @@ test('file is copied with destination tree structure created', (assert) => {
             .then(() => directory.remove(destinationDir));
     });
 });
+
+test('file is renamed', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const sourceFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+        const destinationFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+
+        file.write(sourceFile, '1')
+            .then(() => file.rename(sourceFile, destinationFile))
+            .then(() => file.exists(destinationFile))
+            .then((exists) => {
+                assert.ok(exists, 'destination exists');
+            })
+            .then(() => file.exists(sourceFile))
+            .then((exists) => {
+                assert.notOk(exists, 'source renamed');
+                assert.end();
+            })
+            .then(() => file.remove(destinationFile));
+    });
+});

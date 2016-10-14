@@ -42,6 +42,7 @@ File
 - [exists](#file-exists)
 - [create](#create-file)
 - [remove](#remove-file)
+- [rename](#rename-file)
 - [copy](#copy-file)
 - [read](#read-file)
 - [write](#write-file)
@@ -107,6 +108,23 @@ Example:
 const io = require('io-extra');
 
 io.file.remove('/tmp/myfile').then(() => console.log('file removed.'));
+```
+
+### rename file
+
+**rename(src, dest, [overwrite])**
+
+Renames a file. Promise returns the full path of the destination file.
+
+- overwrite: (optional boolean) overwrite existing file, default is `true`.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.file.rename('/tmp/myfile', '/tmp/myfile.bak')
+    .then((file) => console.log('file renamed to ' + file));
 ```
 
 ### copy file
