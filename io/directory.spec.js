@@ -126,6 +126,7 @@ test('cleans directory', (assert) => {
             .then(() => file.exists(sourceFile))
             .then((exists) => {
                 assert.notOk(exists, 'file does not exist');
+                assert.end();
             })
             .then(() => directory.remove(source));
     });
