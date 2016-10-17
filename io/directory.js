@@ -48,6 +48,10 @@ function copy(src, dest, options = {}) {
     return fs.copy(src, dest, opts).then(() => path(dest));
 }
 
+function clean(directory) {
+    return fs.emptyDir(directory);
+}
+
 module.exports = {
     path,
     exists,
@@ -56,4 +60,6 @@ module.exports = {
     delete: remove,
     rename,
     copy,
+    clean,
+    empty: clean,
 };

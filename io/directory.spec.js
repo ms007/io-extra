@@ -114,3 +114,19 @@ test('renames directory with files', (assert) => {
             .then(() => directory.remove(source));
     });
 });
+
+test('cleans directory', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const source = `${defaultDirectory}/${randomstring.generate(shortname)}`;
+        const filename = `${randomstring.generate(shortname)}.txt`;
+        const sourceFile = `${source}/${filename}`;
+
+        file.create(sourceFile)
+            .then(() => directory.clean(source))
+            .then(() => file.exists(sourceFile))
+            .then((exists) => {
+                assert.notOk(exists, 'file does not exist');
+            })
+            .then(() => directory.remove(source));
+    });
+});

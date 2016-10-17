@@ -196,6 +196,7 @@ Directory
 - [remove](#remove-directory)
 - [rename](#rename-directory)
 - [copy](#copy-directory)
+- [clean](#clean-directory)
 
 ### resolve directory fullpath
 **path(directory)**
@@ -301,6 +302,24 @@ const io = require('io-extra');
 
 io.directory.copy('/tmp', '/temp')
     .then((directory) => console.log('directory copied to: ' + directory));
+```
+
+### clean directory
+
+**clean(directory)**
+
+Cleans directory contents.
+If the directory does not exist, it is created. The directory itself is not deleted.
+Empty promise is returned.
+
+Alias: `empty()`
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.directory.clean('/tmp').then(() => console.log('directory cleaned.'));
 ```
 
 [1]: https://www.npmjs.org/package/fs-promise
