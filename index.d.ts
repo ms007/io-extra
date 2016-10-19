@@ -9,6 +9,7 @@ declare const io_extra: {
         delete(directory: string): Promise<any>;
         empty(directory: string): Promise<any>;
         exists(directory: string): Promise<boolean>;
+        move(src: string, dest: string, overwrite?: boolean): Promise<string>;
         path(directory: string): Promise<string>;
         remove(directory: string): Promise<any>;
         rename(src: string, dest: string, overwrite?: boolean): Promise<any>;
@@ -18,6 +19,7 @@ declare const io_extra: {
         create(file: string): Promise<string>;
         delete(file: string): Promise<any>;
         exists(file: string): Promise<boolean>;
+        move(src: string, dest: string, overwrite?: boolean): Promise<string>;
         path(file: string): Promise<string>;
         read(file: string, encoding?: Encodings): Promise<string>;
         remove(file: string): Promise<any>;
@@ -40,5 +42,10 @@ interface CopyOptions {
     dereference?: boolean;
     filter?: CopyFilter;
     recursive?: boolean;
+}
+
+interface MoveOptions {
+    overwrite?: boolean;
+    limit?: number;
 }
 

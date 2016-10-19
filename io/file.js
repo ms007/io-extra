@@ -32,6 +32,14 @@ function rename(src, dest, overwrite = true) {
     });
 }
 
+function move(src, dest, overwrite = true) {
+    const options = {
+        clobber: overwrite,
+    };
+
+    return fs.move(src, dest, options).then(() => path(dest));
+}
+
 function copy(src, dest, overwrite = true, preserveTimestamps = false) {
     const options = {
         clobber: overwrite,
@@ -59,6 +67,7 @@ module.exports = {
     remove,
     delete: remove,
     rename,
+    move,
     copy,
     read,
     write,

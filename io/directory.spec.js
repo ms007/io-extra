@@ -131,3 +131,35 @@ test('cleans directory', (assert) => {
             .then(() => directory.remove(source));
     });
 });
+
+test('moves directory and overwrite', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const source = `${defaultDirectory}/${randomstring.generate(shortname)}`;
+        const filename = `${randomstring.generate(shortname)}.txt`;
+        const filename2 = `${randomstring.generate(shortname)}.txt`;
+        const sourceFile = `${source}/${filename}`;
+        const sourceFile2 = `${source}/${filename2}`;
+        const destination = `${defaultDirectory}/${randomstring.generate(shortname)}`;
+        const destinationFile = `${destination}/${filename}`;
+        const destinationFile2 = `${destination}/${filename2}`;
+
+        directory.create(destination)
+            .then(() => file.create(sourceFile))
+            .then(() => file.create(sourceFile2))
+            .then(() => directory.move(source, destination))
+            .then(() => directory.exists(source))
+            .then((exists) => {
+                assert.notOk(exists, 'source moved');
+            })
+            .then(() => file.exists(destinationFile))
+            .then((exists) => {
+                assert.ok(exists, 'file exists');
+            })
+            .then(() => file.exists(destinationFile2))
+            .then((exists) => {
+                assert.ok(exists, 'file exists');
+                assert.end();
+            })
+            .then(() => directory.remove(destination));
+    });
+});

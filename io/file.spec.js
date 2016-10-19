@@ -170,3 +170,24 @@ test('file is renamed', (assert) => {
             .then(() => file.remove(destinationFile));
     });
 });
+
+test('file is moved', (assert) => {
+    ensureDirectory(assert).then(() => {
+        const sourceFile = `${defaultDirectory}/${randomstring.generate(options)}.txt`;
+        const destinationDir = `${defaultDirectory}/${randomstring.generate(options)}`;
+        const destinationFile = `${destinationDir}/${randomstring.generate(options)}.txt`;
+
+        file.write(sourceFile, '1')
+            .then(() => file.move(sourceFile, destinationFile))
+            .then(() => file.exists(destinationFile))
+            .then((exists) => {
+                assert.ok(exists, 'destination exists');
+            })
+            .then(() => file.exists(sourceFile))
+            .then((exists) => {
+                assert.notOk(exists, 'source moved');
+                assert.end();
+            })
+            .then(() => file.remove(destinationDir));
+    });
+});

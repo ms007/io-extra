@@ -43,6 +43,7 @@ File
 - [create](#create-file)
 - [remove](#remove-file)
 - [rename](#rename-file)
+- [move](#move-file)
 - [copy](#copy-file)
 - [read](#read-file)
 - [write](#write-file)
@@ -127,6 +128,24 @@ io.file.rename('/tmp/myfile', '/tmp/myfile.bak')
     .then((file) => console.log('file renamed to ' + file));
 ```
 
+### move file
+
+**move(src, dest, [overwrite])**
+
+Moves a file. If the destination file is in directories that do not exist, these directories are created.
+Promise returns the full path of the destination file.
+
+- overwrite: (optional boolean) overwrite existing file, default is `true`.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.file.move('/tmp/myfile', '/tmp/dest/myfile.bak')
+    .then((file) => console.log('file moved to ' + file));
+```
+
 ### copy file
 
 **copy(src, dest, [overwrite], [preserveTimestamps])**
@@ -195,6 +214,7 @@ Directory
 - [create](#create-directory)
 - [remove](#remove-directory)
 - [rename](#rename-directory)
+- [move](#move-directory)
 - [copy](#copy-directory)
 - [clean](#clean-directory)
 
@@ -276,6 +296,24 @@ const io = require('io-extra');
 
 io.directory.rename('/tmp', '/bak')
     .then((directory) => console.log('directory renamed to ' + directory));
+```
+
+### move directory
+
+**move(src, dest, [overwrite])**
+
+Moves a directory. If the destination directory is in directories that do not exist, these directories are created.
+Promise returns the full path of the destination directory.
+
+- overwrite: (optional boolean) overwrite existing directories or files, default is `true`.
+
+Example:
+
+```js
+const io = require('io-extra');
+
+io.directory.move('/tmp', '/dest/tmp')
+    .then((directory) => console.log('directory moved to ' + directory));
 ```
 
 ### copy directory
